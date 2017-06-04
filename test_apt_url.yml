@@ -1,0 +1,7 @@
+---
+- name: apt_key
+  hosts: rally1
+  tasks: 
+  - apt_key:
+      url: "https://apt-mirror.openstack.blueboxgrid.com/keys/bbg_ubuntu.key"
+      validate_certs: false

@@ -1,0 +1,7 @@
+---
+group_testfile:
+  enabled: true
+  dirname: /root/test_dir_group
+  filename:
+    - group_file1
+    - group_file2

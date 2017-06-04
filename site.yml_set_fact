@@ -1,0 +1,26 @@
+---
+# UC:
+#  - For L1_var1, list all L3_vars' keys when L3_var2 is defined.
+#  - For L2_var1, list all L3_vars' keys when L3_var2 is defined. 
+#  - Print the list, see which one is present (L1_var1 or L2_var1).
+
+- name: For L1_var1, list all L3_vars' keys when L3_var2 is defined.
+  hosts: rally1
+  # set_fact: partition_paths="{{ swift.disks | selectattr('partition_path', 'defined') | map(attribute='partition_path') | list}}"  
+  tasks:
+    - set_fact: key_list="{{ L1_var1.L2_var{1,2} | selectattr('L3_var2', 'defined') | map(attribute='L3_var1'| list }}"
+    - command: echo "{{key_list}}"
+
+#L1_var1:
+#  L2_var1:
+#    L3_var1: L3_v11_key1
+#    L3_var2: L3_v11_key2
+#  L2_var2:
+#    L3_var1: L3_v12_key1
+#
+#L1_var2:
+#  L2_var1:
+#    L3_var1: L3_v21_key1
+#  L2_var2:
+#    L3_var1: L3_v22_key1
+#    L3_var2: L3_v22_key2

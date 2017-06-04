@@ -1,0 +1,9 @@
+[group1]
+rally1
+rally2
+
+[server]
+rally1
+
+[client]
+rally2

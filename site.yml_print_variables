@@ -1,0 +1,6 @@
+---
+- name: Test shell command 1
+  hosts: rally1
+  tags: always
+  tasks:
+    - shell: "echo {{ ansible_node }} > /root/ansible_node" 

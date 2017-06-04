@@ -1,0 +1,9 @@
+---
+- name: test_when
+  hosts: rally1
+  tasks:
+    # This task is used to test when syntax with variables from group_vars/all.yml
+    # Skip if the dir exists.
+    - command: echo "sysdig is enable" > /root/host_file1
+      when: common.sysdig.enabled|bool
+    - debug: msg="Msg the motherfucker is {{ common.sysdig.enabled }}. "

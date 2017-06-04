@@ -1,0 +1,19 @@
+---
+L1_var1:
+  L2_var1: L2_v11_key1
+    L3_var1: L3_v11_key1
+    L3_var2: L3_v11_key2
+  L2_var2:
+    L3_var1: L3_v12_key1
+
+L1_var2:
+  L2_var1:
+    L3_var1: L3_v21_key1
+  L2_var2:
+    L3_var1: L3_v22_key1
+    L3_var2: L3_v22_key2
+
+
+common:
+  sysdig:
+    enable: false

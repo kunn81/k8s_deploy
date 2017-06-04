@@ -1,0 +1,10 @@
+- name: create test dir
+  hosts: all
+  tags: always
+  tasks:
+    # This forces the gathering of facts from every host in the inventory
+    # even if hosts were --limit'd out.
+    - command: mkdir test_dir
+      args:
+        chdir: /root/
+        creates: /root/test_dir/

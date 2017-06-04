@@ -1,0 +1,9 @@
+---
+- name: install docker
+  hosts: k8s
+  tags: docker
+  tasks:
+    # This create test dir for storing the group/host test files.
+    # Skip if the dir exists.
+    - apt: name=docker.io state=present
+    - service: name=docker state=started enabled=yes

@@ -1,0 +1,3 @@
+---
+git_dir: '/home/root/k8s'
+KUBERNETES_PROVIDER: ubuntu

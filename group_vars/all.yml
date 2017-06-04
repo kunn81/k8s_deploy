@@ -1,0 +1,6 @@
+---
+common:
+  sysdig:
+    enabled: false
+
+ansible_node: rally1

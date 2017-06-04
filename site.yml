@@ -1,0 +1,35 @@
+---
+- name: create test dir
+  hosts: all
+  tags: always
+  tasks:
+    # This create test dir for storing the group/host test files.
+    # Skip if the dir exists.
+    - command: mkdir {{ testfile.dirname }}
+      when: testfile.enabled 
+      args:
+        chdir: /root/
+        creates: "{{ testfile.dirname }}"
+
+    - command: touch {{ testfile.filename.0 }}
+      args:
+        chdir: "{{ testfile.dirname }}"
+        creates: {{ testfile.dirname }}/{{ testfile.filename.0 }}
+
+- name: create test dir and files
+  hosts: host1
+  tags: always
+  tasks:
+    # This create test dir for storing the group/host test files.
+    # Skip if the dir exists.
+    - command: mkdir {{ testfile.dirname }}
+      when: testfile.enabled
+      args:
+        chdir: /root/
+        creates: "{{ testfile.dirname }}"
+
+    # Create the 2nd test file for rally1.
+    - command: touch {{ testfile.filename.1 }}
+      args:
+        chdir: "{{ testfile.dirname }}"
+        creates: {{ testfile.dirname }}/{{ testfile.filename.1 }}

@@ -1,0 +1,13 @@
+---
+- name: fetch ursula_monitoring when install method is tar
+  hosts: rally1
+  tasks: 
+#  - get_url: url=https://github.com/blueboxgroup/ursula-monitoring/archive/master.tar.gz
+  - get_url: url=https://github.com/blueboxgroup/ursula/blob/master/README.md
+           dest=/tmp/ursula-monitoring-master
+           mode=0644
+           validate_certs=true
+- name: delete the downloaded file
+  hosts: rally1
+  tasks:
+  - command: rm -rf /tmp/ursula-monitoring-master

@@ -1,0 +1,10 @@
+---
+- name: create a test file if not present and insert one line
+  hosts: all
+  tags: always
+  tasks:
+    # create a test file if not present
+    - file: path=/root/foo.file state=touch mode="u=rw,g=r,o=r"
+
+    # Insert one line into the file
+    - lineinfile: dest=/root/foo.file line="This is the test line"

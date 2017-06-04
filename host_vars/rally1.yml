@@ -1,0 +1,7 @@
+---
+#testfile:
+#  enabled: true
+#  dirname: /root/test_dir
+#  filename:
+#    - host_file1
+#    - host_file_null
