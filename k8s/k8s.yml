@@ -1,7 +1,7 @@
 ---
-- name: install k8s
-  hosts: k8s
-  tags: k8s_install
+- name: download k8s
+  hosts: master
+  tags: k8s_download
   tasks:
     # This create test dir for storing the group/host test files.
     # Skip if the dir exists.
@@ -11,7 +11,7 @@
         dest: "{{ git_dir }}"
 
 - name: config k8s
-  hosts: k8s
+  hosts: master
   tags: k8s_config
   tasks:
     - shell: "cd {{ git_dir }}; git checkout release-1.6"
@@ -20,13 +20,23 @@
         dest: '{{ git_dir }}/cluster/{{ KUBERNETES_PROVIDER }}/config-default.sh'
 
 - name: backup k8s installation dir
-  hosts: k8s
+  hosts: master
   tags: backup
   tasks:
-    - shell: "cp -rf {{ git_dir }} {{ git_dir }}.bak"
+    - shell: "cp -rTf {{ git_dir }} {{ git_dir }}.bak"
+      when: backup == "true"
 
 - name: restore k8s installation dir
-  hosts: k8s
+  hosts: master
   tags: restore
   tasks:
-    - shell: "mv {{ git_dir }} {{ git_dir }}.old; cp -rf {{ git_dir }}.bak {{ git_dir }}"
+    - shell: "mv {{ git_dir }} {{ git_dir }}.old; cp -rfT {{ git_dir }}.bak {{ git_dir }}"
+      when: restore == "true"
+
+- name: install k8s
+  hosts: master
+  tags: install
+  tasks:
+#    - shell: "KUBERNETES_PROVIDER={{ KUBERNETES_PROVIDER }} ; bash {{ git_dir }}/cluster/kube-up.sh"
+    - shell: "export KUBERNETES_PROVIDER=ubuntu ; yes | bash {{ git_dir }}/cluster/kube-up.sh"
+

@@ -1,7 +1,7 @@
 ---
 - name: create test dir
   hosts: all
-  tags: always
+  tags: create
   tasks:
     # This create test dir for storing the group/host test files.
     # Skip if the dir exists.
@@ -14,11 +14,11 @@
     - command: touch {{ testfile.filename.0 }}
       args:
         chdir: "{{ testfile.dirname }}"
-        creates: {{ testfile.dirname }}/{{ testfile.filename.0 }}
+        creates: "{{ testfile.dirname }} / {{ testfile.filename.0 }}"
 
 - name: create test dir and files
   hosts: host1
-  tags: always
+  tags: create
   tasks:
     # This create test dir for storing the group/host test files.
     # Skip if the dir exists.
@@ -32,4 +32,10 @@
     - command: touch {{ testfile.filename.1 }}
       args:
         chdir: "{{ testfile.dirname }}"
-        creates: {{ testfile.dirname }}/{{ testfile.filename.1 }}
+        creates: "{{ testfile.dirname }}/ {{ testfile.filename.1 }}"
+
+- name: output the of linux release
+  hosts: all
+  tags: release
+  tasks:
+    - shell: "cat /etc/issue"
